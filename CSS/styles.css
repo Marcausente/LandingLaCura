@@ -2,7 +2,8 @@
 :root {
     --primary-color: rgba(245, 178, 192, 1);
     --primary-light: rgba(245, 178, 192, 0.1);
-    --primary-dark: rgba(245, 178, 192, 0.8);
+    --primary-dark: rgba(220, 150, 170, 1); /* Más oscuro para mejor contraste */
+    --primary-darker: rgba(200, 130, 150, 1); /* Aún más oscuro para botones */
     --secondary-blue: #4A90E2;
     --secondary-green: #7ED321;
     --secondary-orange: #F5A623;
@@ -53,7 +54,10 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     color: var(--gray-800);
-    background-color: var(--background-light);
+    background: linear-gradient(180deg, 
+        var(--background-light) 0%, 
+        var(--background-card) 50%,
+        var(--background-light) 100%);
     overflow-x: hidden;
 }
 
@@ -170,7 +174,11 @@ body {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--background-light) 0%, var(--background-medium) 100%);
+    background: linear-gradient(135deg, 
+        var(--background-light) 0%, 
+        var(--background-medium) 30%,
+        rgba(245, 178, 192, 0.15) 70%,
+        var(--background-light) 100%);
     position: relative;
     overflow: hidden;
 }
@@ -249,7 +257,7 @@ body {
 }
 
 .cta-primary {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 100%);
     color: var(--white);
     border: none;
     padding: 16px 32px;
@@ -264,7 +272,7 @@ body {
 .cta-primary:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
-    background: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-darker) 100%);
 }
 
 .cta-primary.large {
@@ -409,7 +417,10 @@ body {
 /* Curso Section */
 .curso {
     padding: 120px 0;
-    background: var(--background-light);
+    background: linear-gradient(180deg, 
+        var(--background-light) 0%, 
+        var(--background-card) 50%,
+        var(--background-light) 100%);
 }
 
 .curso-grid {
@@ -455,7 +466,11 @@ body {
 /* Beneficios Section */
 .beneficios {
     padding: 120px 0;
-    background: var(--background-medium);
+    background: linear-gradient(135deg, 
+        var(--background-medium) 0%, 
+        rgba(245, 178, 192, 0.1) 30%,
+        var(--background-medium) 70%,
+        rgba(245, 178, 192, 0.05) 100%);
 }
 
 .beneficios-content {
@@ -514,7 +529,12 @@ body {
 /* Testimonios Section */
 .testimonios {
     padding: 120px 0;
-    background: var(--background-light);
+    background: linear-gradient(180deg, 
+        var(--background-light) 0%, 
+        var(--background-card) 25%,
+        var(--background-light) 50%,
+        var(--background-card) 75%,
+        var(--background-light) 100%);
 }
 
 .testimonios-grid {
@@ -580,7 +600,11 @@ body {
 /* CTA Section */
 .cta-section {
     padding: 120px 0;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-blue));
+    background: linear-gradient(135deg, 
+        var(--primary-darker) 0%, 
+        var(--primary-dark) 30%,
+        var(--secondary-blue) 70%,
+        var(--primary-darker) 100%);
     color: var(--white);
     text-align: center;
 }
@@ -616,7 +640,11 @@ body {
 /* Contacto Section */
 .contacto {
     padding: 120px 0;
-    background: var(--background-medium);
+    background: linear-gradient(135deg, 
+        var(--background-medium) 0%, 
+        rgba(245, 178, 192, 0.08) 40%,
+        var(--background-medium) 80%,
+        rgba(245, 178, 192, 0.12) 100%);
 }
 
 .contacto-content {
