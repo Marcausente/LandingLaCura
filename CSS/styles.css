@@ -1,8 +1,8 @@
 /* Reset y variables CSS */
 :root {
-    --primary-color: rgba(245, 178, 192, 1);
+    --primary-color: rgb(231, 78, 111);
     --primary-light: rgba(245, 178, 192, 0.1);
-    --primary-dark: rgba(220, 150, 170, 1); /* Más oscuro para mejor contraste */
+    --primary-dark: rgb(231, 78, 111); /* Más oscuro para mejor contraste */
     --primary-darker: rgba(200, 130, 150, 1); /* Aún más oscuro para botones */
     --secondary-blue: #4A90E2;
     --secondary-green: #7ED321;
