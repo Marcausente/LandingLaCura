@@ -23,13 +23,13 @@ window.addEventListener('scroll', function() {
     const currentScrollY = window.scrollY;
     
     if (currentScrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.background = 'rgba(254, 247, 247, 0.95)';
+        header.style.backdropFilter = 'blur(20px)';
+        header.style.borderBottom = '1px solid rgba(245, 178, 192, 0.3)';
+    } else {
+        header.style.background = 'rgba(254, 247, 247, 0.9)';
         header.style.backdropFilter = 'blur(20px)';
         header.style.borderBottom = '1px solid rgba(245, 178, 192, 0.2)';
-    } else {
-        header.style.background = 'rgba(255, 255, 255, 0.8)';
-        header.style.backdropFilter = 'blur(20px)';
-        header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.2)';
     }
     
     // Hide/show header on scroll
