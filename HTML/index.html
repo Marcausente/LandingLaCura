@@ -3,58 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Cura - Landing Page</title>
+    <title>La Cura - Psicología para Empresarios</title>
     <link rel="stylesheet" href="../CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <h1>La Cura</h1>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="../IMG/Marca/La cura-08.png" alt="La Cura Logo" class="logo-img">
+                    <span class="logo-text">La Cura</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#curso" class="nav-link">El Curso</a></li>
+                    <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+                    <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+                <button class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
         </nav>
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h2>Bienvenido a La Cura</h2>
-                <p>Tu solución integral para el bienestar</p>
-                <button class="cta-button">Conoce más</button>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>✨ Nuevo Curso Disponible</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Psicología para 
+                        <span class="highlight">Empresarios</span>
+                    </h1>
+                    <p class="hero-description">
+                        Descubre las herramientas psicológicas que transformarán tu liderazgo empresarial. 
+                        Aprende a gestionar equipos, tomar decisiones estratégicas y desarrollar 
+                        una mentalidad de éxito.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="cta-primary">Comenzar Ahora</button>
+                        <button class="cta-secondary">
+                            <span>▶</span>
+                            Ver Demo
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Estudiantes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">Calificación</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">30</span>
+                            <span class="stat-label">Horas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-container">
+                        <img src="../IMG/Marca/mockups-15.jpg" alt="Curso La Cura" class="hero-image">
+                        <div class="floating-card card-1">
+                            <div class="card-icon">🧠</div>
+                            <span>Psicología Aplicada</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <div class="card-icon">💼</div>
+                            <span>Liderazgo</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <div class="card-icon">📈</div>
+                            <span>Resultados</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="servicios" class="services">
-            <h2>Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Servicio 1</h3>
-                    <p>Descripción del servicio</p>
+        <!-- Curso Section -->
+        <section id="curso" class="curso">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">¿Qué aprenderás?</h2>
+                    <p class="section-subtitle">
+                        Un programa completo diseñado específicamente para empresarios y líderes
+                    </p>
                 </div>
-                <div class="service-card">
-                    <h3>Servicio 2</h3>
-                    <p>Descripción del servicio</p>
-                </div>
-                <div class="service-card">
-                    <h3>Servicio 3</h3>
-                    <p>Descripción del servicio</p>
+                <div class="curso-grid">
+                    <div class="curso-card">
+                        <div class="curso-icon">🎯</div>
+                        <h3>Gestión de Equipos</h3>
+                        <p>Aprende técnicas psicológicas para motivar, comunicar y liderar equipos de alto rendimiento.</p>
+                    </div>
+                    <div class="curso-card">
+                        <div class="curso-icon">🧠</div>
+                        <h3>Psicología del Consumidor</h3>
+                        <p>Comprende el comportamiento del consumidor para tomar mejores decisiones de negocio.</p>
+                    </div>
+                    <div class="curso-card">
+                        <div class="curso-icon">⚡</div>
+                        <h3>Mentalidad de Éxito</h3>
+                        <p>Desarrolla una mentalidad empresarial sólida y resiliente ante los desafíos.</p>
+                    </div>
+                    <div class="curso-card">
+                        <div class="curso-icon">🤝</div>
+                        <h3>Negociación Efectiva</h3>
+                        <p>Domina las técnicas psicológicas para negociaciones exitosas y relaciones comerciales.</p>
+                    </div>
+                    <div class="curso-card">
+                        <div class="curso-icon">📊</div>
+                        <h3>Toma de Decisiones</h3>
+                        <p>Elimina sesgos cognitivos y toma decisiones más inteligentes para tu empresa.</p>
+                    </div>
+                    <div class="curso-card">
+                        <div class="curso-icon">💡</div>
+                        <h3>Innovación y Creatividad</h3>
+                        <p>Desarrolla procesos creativos que impulsen la innovación en tu organización.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto" class="contact">
-            <h2>Contacto</h2>
-            <p>Ponte en contacto con nosotros</p>
+        <!-- Beneficios Section -->
+        <section id="beneficios" class="beneficios">
+            <div class="container">
+                <div class="beneficios-content">
+                    <div class="beneficios-text">
+                        <h2>¿Por qué elegir La Cura?</h2>
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">🎓</div>
+                            <div class="beneficio-content">
+                                <h3>Contenido Especializado</h3>
+                                <p>Diseñado específicamente para empresarios y líderes empresariales</p>
+                            </div>
+                        </div>
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">👨‍🏫</div>
+                            <div class="beneficio-content">
+                                <h3>Expertos en Psicología</h3>
+                                <p>Instructores con amplia experiencia en psicología empresarial</p>
+                            </div>
+                        </div>
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">📱</div>
+                            <div class="beneficio-content">
+                                <h3>Acceso de por Vida</h3>
+                                <p>Accede al contenido cuando quieras, desde cualquier dispositivo</p>
+                            </div>
+                        </div>
+                        <div class="beneficio-item">
+                            <div class="beneficio-icon">🏆</div>
+                            <div class="beneficio-content">
+                                <h3>Certificación</h3>
+                                <p>Recibe un certificado de finalización reconocido en el sector</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="beneficios-visual">
+                        <img src="../IMG/Marca/botella-13.png" alt="La Cura Producto" class="beneficios-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios Section -->
+        <section id="testimonios" class="testimonios">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Lo que dicen nuestros estudiantes</h2>
+                    <p class="section-subtitle">
+                        Empresarios que ya transformaron su liderazgo
+                    </p>
+                </div>
+                <div class="testimonios-grid">
+                    <div class="testimonio-card">
+                        <div class="testimonio-content">
+                            <p>"Este curso cambió completamente mi forma de liderar. Las técnicas psicológicas me han ayudado a construir un equipo más cohesionado y productivo."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">👨‍💼</div>
+                            <div class="author-info">
+                                <h4>Carlos Mendoza</h4>
+                                <span>CEO, TechStart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="testimonio-content">
+                            <p>"La psicología del consumidor me abrió los ojos. Ahora entiendo mejor a mis clientes y mis ventas han aumentado un 40%."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">👩‍💼</div>
+                            <div class="author-info">
+                                <h4>Ana Rodríguez</h4>
+                                <span>Directora de Ventas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="testimonio-content">
+                            <p>"Las técnicas de negociación son increíbles. He cerrado acuerdos que antes no hubiera podido gracias a lo que aprendí aquí."</p>
+                        </div>
+                        <div class="testimonio-author">
+                            <div class="author-avatar">👨‍💻</div>
+                            <div class="author-info">
+                                <h4>Miguel Torres</h4>
+                                <span>Fundador, InnovaCorp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>¿Listo para transformar tu liderazgo?</h2>
+                    <p>Únete a cientos de empresarios que ya están aplicando la psicología en sus negocios</p>
+                    <div class="cta-actions">
+                        <button class="cta-primary large">Inscribirse Ahora</button>
+                        <div class="cta-guarantee">
+                            <span>🛡️</span>
+                            <span>Garantía de 30 días</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto Section -->
+        <section id="contacto" class="contacto">
+            <div class="container">
+                <div class="contacto-content">
+                    <div class="contacto-info">
+                        <h2>¿Tienes preguntas?</h2>
+                        <p>Estamos aquí para ayudarte. Contáctanos y te responderemos en menos de 24 horas.</p>
+                        <div class="contacto-methods">
+                            <div class="contacto-method">
+                                <div class="method-icon">📧</div>
+                                <div class="method-info">
+                                    <h4>Email</h4>
+                                    <span>info@lacura.com</span>
+                                </div>
+                            </div>
+                            <div class="contacto-method">
+                                <div class="method-icon">📱</div>
+                                <div class="method-info">
+                                    <h4>WhatsApp</h4>
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contacto-form">
+                        <form class="form">
+                            <div class="form-group">
+                                <input type="text" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Tu email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Tu mensaje" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="cta-primary">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 La Cura. Todos los derechos reservados.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../IMG/Marca/La cura-09.png" alt="La Cura" class="footer-logo-img">
+                    <span>La Cura</span>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Curso</h4>
+                        <ul>
+                            <li><a href="#curso">Contenido</a></li>
+                            <li><a href="#beneficios">Beneficios</a></li>
+                            <li><a href="#testimonios">Testimonios</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Soporte</h4>
+                        <ul>
+                            <li><a href="#contacto">Contacto</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Ayuda</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Términos</a></li>
+                            <li><a href="#">Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 La Cura. Todos los derechos reservados.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="../JS/script.js"></script>
