@@ -2,7 +2,7 @@
 :root {
     --primary-color: rgb(231, 78, 111);
     --primary-light: rgba(245, 178, 192, 0.1);
-    --primary-dark: rgb(231, 78, 111); /* Más oscuro para mejor contraste */
+    --primary-dark: rgb(179, 68, 92); /* Más oscuro para mejor contraste */
     --primary-darker: rgba(200, 130, 150, 1); /* Aún más oscuro para botones */
     --secondary-blue: #4A90E2;
     --secondary-green: #7ED321;
@@ -12,7 +12,6 @@
     /* Colores de fondo distintivos */
     --white: #FEF7F7; /* Rosado muy claro en lugar de blanco puro */
     --white-pure: #FFFFFF; /* Blanco puro solo para elementos específicos */
-    --background-light: #FDF2F4; /* Fondo rosado claro */
     --background-medium: #FCE8EB; /* Fondo rosado medio */
     --background-card: #FEF9FA; /* Fondo para tarjetas */
     
@@ -73,14 +72,14 @@ body::before {
     pointer-events: none;
     background-image: 
         repeating-linear-gradient(45deg, 
-            rgba(231, 78, 111, 0.03) 0px, 
-            rgba(231, 78, 111, 0.03) 1px,
+            rgba(255, 182, 193, 0.15) 0px, 
+            rgba(255, 182, 193, 0.15) 1px,
             transparent 1px, 
             transparent 10px
         ),
         repeating-linear-gradient(-45deg, 
-            rgba(231, 78, 111, 0.03) 0px, 
-            rgba(231, 78, 111, 0.03) 1px,
+            rgba(255, 182, 193, 0.15) 0px, 
+            rgba(255, 182, 193, 0.15) 1px,
             transparent 1px, 
             transparent 10px
         );
@@ -210,13 +209,13 @@ main {
     display: flex;
     align-items: center;
     background: 
-        radial-gradient(circle at 20% 150%, rgba(231, 78, 111, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% -50%, rgba(231, 78, 111, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 20% 150%, rgba(255, 182, 193, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% -50%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
         linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.8) 0%, 
-            rgba(245, 178, 192, 0.2) 30%,
-            rgba(231, 78, 111, 0.1) 70%,
-            rgba(255, 255, 255, 0.9) 100%);
+            rgba(255, 255, 255, 0.9) 0%, 
+            rgba(255, 182, 193, 0.15) 30%,
+            rgba(255, 105, 140, 0.08) 70%,
+            rgba(255, 255, 255, 0.95) 100%);
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
@@ -231,8 +230,8 @@ main {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 80% 20%, rgba(231, 78, 111, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 20% 80%, rgba(231, 78, 111, 0.08) 0%, transparent 40%);
+        radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.12) 0%, transparent 40%);
     pointer-events: none;
     opacity: 0.7;
     animation: gradientShift 15s ease-in-out infinite alternate;
@@ -489,10 +488,31 @@ main {
 /* Curso Section */
 .curso {
     padding: 120px 0;
-    background: linear-gradient(180deg, 
-        var(--background-light) 0%, 
-        var(--background-card) 50%,
-        var(--background-light) 100%);
+    background: 
+        linear-gradient(180deg, 
+            var(--white-pure) 0%,
+            var(--background-medium) 100%),
+        repeating-linear-gradient(45deg, 
+            rgba(231, 78, 111, 0.03) 0px,
+            rgba(231, 78, 111, 0.03) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+    position: relative;
+    overflow: hidden;
+}
+
+.curso::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(231, 78, 111, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(231, 78, 111, 0.1) 0%, transparent 50%);
+    opacity: 0.5;
 }
 
 .curso-grid {
@@ -538,11 +558,35 @@ main {
 /* Beneficios Section */
 .beneficios {
     padding: 120px 0;
-    background: linear-gradient(135deg, 
-        var(--background-medium) 0%, 
-        rgba(245, 178, 192, 0.1) 30%,
-        var(--background-medium) 70%,
-        rgba(245, 178, 192, 0.05) 100%);
+    background-color: var(--white-pure);
+    position: relative;
+    overflow: hidden;
+}
+
+.beneficios::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(135deg, 
+            rgba(231, 78, 111, 0.08) 0%,
+            transparent 100%),
+        radial-gradient(
+            circle at 50% 50%,
+            transparent 20%,
+            rgba(231, 78, 111, 0.05) 21%,
+            rgba(231, 78, 111, 0.05) 23%,
+            transparent 24%,
+            transparent 30%,
+            rgba(231, 78, 111, 0.05) 31%,
+            rgba(231, 78, 111, 0.05) 33%,
+            transparent 34%
+        );
+    background-size: 100% 100%, 60px 60px;
+    opacity: 0.6;
 }
 
 .beneficios-content {
@@ -601,12 +645,51 @@ main {
 /* Testimonios Section */
 .testimonios {
     padding: 120px 0;
-    background: linear-gradient(180deg, 
-        var(--background-light) 0%, 
-        var(--background-card) 25%,
-        var(--background-light) 50%,
-        var(--background-card) 75%,
-        var(--background-light) 100%);
+    background: var(--background-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonios::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(45deg, 
+            rgba(231, 78, 111, 0.05) 25%, 
+            transparent 25%,
+            transparent 75%, 
+            rgba(231, 78, 111, 0.05) 75%),
+        linear-gradient(45deg, 
+            rgba(231, 78, 111, 0.05) 25%, 
+            transparent 25%,
+            transparent 75%, 
+            rgba(231, 78, 111, 0.05) 75%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    opacity: 0.4;
+}
+
+.testimonios::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(231, 78, 111, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(231, 78, 111, 0.1) 0%, transparent 40%);
+    opacity: 0.6;
+    z-index: 1;
+}
+
+.testimonios .container {
+    position: relative;
+    z-index: 2;
 }
 
 .testimonios-grid {
@@ -712,11 +795,35 @@ main {
 /* Contacto Section */
 .contacto {
     padding: 120px 0;
-    background: linear-gradient(135deg, 
-        var(--background-medium) 0%, 
-        rgba(245, 178, 192, 0.08) 40%,
-        var(--background-medium) 80%,
-        rgba(245, 178, 192, 0.12) 100%);
+    background-color: var(--white-pure);
+    position: relative;
+    overflow: hidden;
+}
+
+.contacto::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(135deg, 
+            rgba(231, 78, 111, 0.08) 0%,
+            transparent 100%),
+        repeating-radial-gradient(
+            circle at 50% 50%,
+            transparent 0,
+            transparent 10px,
+            rgba(231, 78, 111, 0.03) 10px,
+            rgba(231, 78, 111, 0.03) 20px
+        );
+    opacity: 0.5;
+}
+
+.contacto .container {
+    position: relative;
+    z-index: 1;
 }
 
 .contacto-content {
