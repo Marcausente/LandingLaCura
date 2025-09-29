@@ -23,13 +23,17 @@ window.addEventListener('scroll', function() {
     const currentScrollY = window.scrollY;
     
     if (currentScrollY > 100) {
-        header.style.background = 'rgba(254, 247, 247, 0.95)';
-        header.style.backdropFilter = 'blur(20px)';
+        header.style.background = 'rgba(254, 247, 247, 0.92)';
+        header.style.backdropFilter = 'blur(16px) saturate(180%)';
+        header.style.webkitBackdropFilter = 'blur(16px) saturate(180%)';
         header.style.borderBottom = '1px solid rgba(245, 178, 192, 0.3)';
+        header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08)';
     } else {
-        header.style.background = 'rgba(254, 247, 247, 0.9)';
-        header.style.backdropFilter = 'blur(20px)';
+        header.style.background = 'rgba(254, 247, 247, 0.85)';
+        header.style.backdropFilter = 'blur(12px) saturate(180%)';
+        header.style.webkitBackdropFilter = 'blur(12px) saturate(180%)';
         header.style.borderBottom = '1px solid rgba(245, 178, 192, 0.2)';
+        header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.05)';
     }
     
     // Hide/show header on scroll
