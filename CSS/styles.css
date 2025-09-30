@@ -128,14 +128,36 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(135deg, rgba(231, 78, 111, 0.85) 0%, rgba(179, 68, 92, 0.85) 100%);
-    backdrop-filter: blur(4px) saturate(140%);
-    -webkit-backdrop-filter: blur(4px) saturate(140%);
-    border: 1px solid rgba(245, 178, 192, 0.3);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 9999px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    margin-top: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(255, 255, 255, 0.35);
+    margin-top: 0px;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
+        radial-gradient(120% 80% at 100% 100%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="40" height="40" filter="url(%23n)" opacity="0.03"/></svg>');
+    background-blend-mode: screen;
+    pointer-events: none;
+}
+
+.nav-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.15) 100%);
+    pointer-events: none;
 }
 
 .logo {
@@ -170,7 +192,7 @@ main {
 
 .nav-link {
     text-decoration: none;
-    color: var(--white);
+    color: var(--gray-800);
     font-weight: 500;
     font-size: 18px;
     transition: var(--transition);
@@ -180,8 +202,8 @@ main {
 }
 
 .nav-link:hover {
-    color: var(--white);
-    background: rgba(255, 255, 255, 0.15);
+    color: var(--gray-900);
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .nav-link::after {
