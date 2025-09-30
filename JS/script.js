@@ -20,6 +20,18 @@ let lastScrollY = window.scrollY;
 const header = document.querySelector('.header');
 const navContainer = document.querySelector('.nav-container');
 
+// Ajusta padding-top del main según la altura del header
+function setHeaderHeightVar() {
+    const main = document.querySelector('main');
+    if (header && main) {
+        const height = header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', height + 'px');
+    }
+}
+
+window.addEventListener('load', setHeaderHeightVar);
+window.addEventListener('resize', throttle(setHeaderHeightVar, 100));
+
 window.addEventListener('scroll', function() {
     const currentScrollY = window.scrollY;
 
@@ -58,6 +70,11 @@ if (navToggle && navLinks) {
     navToggle.addEventListener('click', function() {
         navLinks.classList.toggle('active');
         navToggle.classList.toggle('active');
+
+        // Ajusta la posición del menú móvil según la altura actual del header
+        if (header && navLinks.classList.contains('active')) {
+            navLinks.style.top = getComputedStyle(document.documentElement).getPropertyValue('--header-height') || (header.offsetHeight + 'px');
+        }
     });
 }
 
