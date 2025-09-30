@@ -92,7 +92,7 @@ body::before {
 main {
     position: relative;
     z-index: 1;
-    padding-top: calc(var(--header-height, 96px) + 8px);
+    padding-top: 0;
 }
 
 /* Container */
@@ -128,12 +128,12 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(135deg, rgba(254, 247, 247, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    background: linear-gradient(135deg, rgba(231, 78, 111, 0.85) 0%, rgba(179, 68, 92, 0.85) 100%);
+    backdrop-filter: blur(4px) saturate(140%);
+    -webkit-backdrop-filter: blur(4px) saturate(140%);
     border: 1px solid rgba(245, 178, 192, 0.3);
     border-radius: 9999px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
     margin-top: 12px;
     transition: var(--transition);
 }
@@ -170,7 +170,7 @@ main {
 
 .nav-link {
     text-decoration: none;
-    color: var(--gray-700);
+    color: var(--white);
     font-weight: 500;
     font-size: 18px;
     transition: var(--transition);
@@ -180,8 +180,8 @@ main {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
-    background: var(--primary-light);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .nav-link::after {
@@ -218,7 +218,7 @@ main {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    min-height: calc(100vh + var(--header-height, 96px));
     display: flex;
     align-items: center;
     background: 

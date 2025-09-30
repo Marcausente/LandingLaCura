@@ -37,18 +37,18 @@ window.addEventListener('scroll', function() {
 
     if (navContainer) {
         if (currentScrollY > 100) {
-            navContainer.style.background = 'rgba(254, 247, 247, 0.95)';
-            navContainer.style.backdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.webkitBackdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.border = '1px solid rgba(245, 178, 192, 0.4)';
-            navContainer.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.12)';
+            navContainer.style.background = 'linear-gradient(135deg, rgba(231, 78, 111, 0.85) 0%, rgba(179, 68, 92, 0.85) 100%)';
+            navContainer.style.backdropFilter = 'blur(4px) saturate(140%)';
+            navContainer.style.webkitBackdropFilter = 'blur(4px) saturate(140%)';
+            navContainer.style.border = '1px solid rgba(245, 178, 192, 0.3)';
+            navContainer.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.12)';
             navContainer.style.transform = 'translateY(0)';
         } else {
-            navContainer.style.background = 'rgba(254, 247, 247, 0.9)';
-            navContainer.style.backdropFilter = 'blur(12px) saturate(180%)';
-            navContainer.style.webkitBackdropFilter = 'blur(12px) saturate(180%)';
+            navContainer.style.background = 'linear-gradient(135deg, rgba(231, 78, 111, 0.85) 0%, rgba(179, 68, 92, 0.85) 100%)';
+            navContainer.style.backdropFilter = 'blur(4px) saturate(140%)';
+            navContainer.style.webkitBackdropFilter = 'blur(4px) saturate(140%)';
             navContainer.style.border = '1px solid rgba(245, 178, 192, 0.3)';
-            navContainer.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.08)';
+            navContainer.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.08)';
         }
     }
 
@@ -304,7 +304,7 @@ style.textContent = `
     .nav-links.active {
         display: flex;
         position: fixed;
-        top: 80px;
+        top: var(--header-height, 96px);
         left: 0;
         right: 0;
         background: rgba(255, 255, 255, 0.95);
