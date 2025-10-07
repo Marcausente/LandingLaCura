@@ -92,9 +92,27 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
+// Acordeón interactivo de Agoney
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', function() {
+        const accordionItem = this.parentElement;
+        const isActive = accordionItem.classList.contains('active');
+        
+        // Cerrar todos los acordeones
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Abrir el acordeón clickeado si no estaba activo
+        if (!isActive) {
+            accordionItem.classList.add('active');
+        }
+    });
+});
+
 // Apply scroll reveal to elements
 document.addEventListener('DOMContentLoaded', function() {
-    const revealElements = document.querySelectorAll('.curso-card, .beneficio-item, .testimonio-card, .section-header');
+    const revealElements = document.querySelectorAll('.curso-card, .beneficio-item, .testimonio-card, .section-header, .agoney-image-container, .agoney-info');
     revealElements.forEach(element => {
         element.classList.add('scroll-reveal');
         observer.observe(element);
