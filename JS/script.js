@@ -15,10 +15,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Performance optimization: Throttle scroll events
+function throttle(func, wait) {
+    let timeout;
+    let lastRan;
+    return function executedFunction(...args) {
+        if (!lastRan) {
+            func(...args);
+            lastRan = Date.now();
+        } else {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if ((Date.now() - lastRan) >= wait) {
+                    func(...args);
+                    lastRan = Date.now();
+                }
+            }, wait - (Date.now() - lastRan));
+        }
+    };
+}
+
 // Efecto de scroll en el header
 let lastScrollY = window.scrollY;
 const header = document.querySelector('.header');
 const navContainer = document.querySelector('.nav-container');
+let ticking = false;
 
 // Ajusta padding-top del main según la altura del header
 function setHeaderHeightVar() {
@@ -32,35 +53,27 @@ function setHeaderHeightVar() {
 window.addEventListener('load', setHeaderHeightVar);
 window.addEventListener('resize', throttle(setHeaderHeightVar, 100));
 
-window.addEventListener('scroll', function() {
+// Scroll handler optimizado con requestAnimationFrame
+function handleScroll() {
     const currentScrollY = window.scrollY;
-
-    if (navContainer) {
-        if (currentScrollY > 100) {
-            navContainer.style.background = 'rgba(255, 255, 255, 0.6)';
-            navContainer.style.backdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.webkitBackdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.border = '1px solid rgba(255, 255, 255, 0.6)';
-            navContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.12)';
-            navContainer.style.transform = 'translateY(0)';
-        } else {
-            navContainer.style.background = 'rgba(255, 255, 255, 0.6)';
-            navContainer.style.backdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.webkitBackdropFilter = 'blur(16px) saturate(180%)';
-            navContainer.style.border = '1px solid rgba(255, 255, 255, 0.6)';
-            navContainer.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.12)';
-        }
-    }
 
     // Hide/show header on scroll
     if (currentScrollY > lastScrollY && currentScrollY > 200) {
-        header.style.transform = 'translateY(-100%)';
+        if (header) header.style.transform = 'translateY(-100%)';
     } else {
-        header.style.transform = 'translateY(0)';
+        if (header) header.style.transform = 'translateY(0)';
     }
     
     lastScrollY = currentScrollY;
-});
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+    }
+}, { passive: true });
 
 // Mobile navigation toggle
 const navToggle = document.getElementById('nav-toggle');
@@ -78,7 +91,7 @@ if (navToggle && navLinks) {
     });
 }
 
-// Scroll reveal animation
+// Scroll reveal animation (optimizado)
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -88,6 +101,8 @@ const observer = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
+            // Dejar de observar una vez revelado para mejorar rendimiento
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
@@ -119,21 +134,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', function() {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.querySelector('.hero-image');
-    const floatingCards = document.querySelectorAll('.floating-card');
-    
-    if (heroImage) {
-        heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+// Parallax effect for hero section (optimizado)
+let parallaxTicking = false;
+const heroImage = document.querySelector('.hero-image');
+const floatingCards = document.querySelectorAll('.floating-card');
+
+// Solo aplicar parallax si el usuario no está en un dispositivo móvil
+const isMobile = window.innerWidth <= 768;
+
+if (!isMobile && (heroImage || floatingCards.length > 0)) {
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        // Solo aplicar parallax si estamos en la sección hero
+        if (scrolled < window.innerHeight) {
+            if (heroImage) {
+                heroImage.style.transform = `translate3d(0, ${scrolled * 0.1}px, 0)`;
+            }
+            
+            floatingCards.forEach((card, index) => {
+                const speed = 0.05 + (index * 0.02);
+                card.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+            });
+        }
+        
+        parallaxTicking = false;
     }
-    
-    floatingCards.forEach((card, index) => {
-        const speed = 0.05 + (index * 0.02);
-        card.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
+
+    window.addEventListener('scroll', function() {
+        if (!parallaxTicking) {
+            window.requestAnimationFrame(updateParallax);
+            parallaxTicking = true;
+        }
+    }, { passive: true });
+}
 
 // Counter animation for stats
 function animateCounter(element, target, duration = 2000) {
@@ -276,36 +310,38 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// CTA button interactions
+// CTA button interactions (optimizado)
 document.querySelectorAll('.cta-primary').forEach(button => {
     button.addEventListener('click', function(e) {
-        // Add ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            left: ${x}px;
-            top: ${y}px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: scale(0);
-            animation: ripple 0.6s ease-out;
-            pointer-events: none;
-        `;
-        
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
+        // Solo añadir efecto ripple en desktop
+        if (window.innerWidth > 768) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 0.6s ease-out;
+                pointer-events: none;
+            `;
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
     });
 });
 
@@ -368,43 +404,25 @@ document.querySelectorAll('img[data-src]').forEach(img => {
     imageObserver.observe(img);
 });
 
-// Add loading animation
+// Add loading animation (optimizado)
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
     
-    // Animate hero elements
+    // Animate hero elements con requestAnimationFrame
     const heroElements = document.querySelectorAll('.hero-badge, .hero-title, .hero-description, .hero-actions, .hero-stats');
     heroElements.forEach((element, index) => {
         element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'all 0.6s ease';
+        element.style.transform = 'translate3d(0, 30px, 0)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         
         setTimeout(() => {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
+            requestAnimationFrame(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translate3d(0, 0, 0)';
+            });
         }, index * 100);
     });
 });
 
-// Add smooth transitions for all interactive elements
-document.querySelectorAll('button, .nav-link, .curso-card, .testimonio-card').forEach(element => {
-    element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-});
-
-// Performance optimization: Throttle scroll events
-function throttle(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply throttling to scroll events
-window.addEventListener('scroll', throttle(function() {
-    // Scroll-based animations can be added here
-}, 16)); // ~60fps
+// Optimización: usar CSS para transiciones en lugar de JS
+// Ya están definidas en el archivo CSS

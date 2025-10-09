@@ -54,21 +54,16 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     color: var(--gray-800);
-    background: 
-        radial-gradient(ellipse at 10% 20%, rgba(255, 192, 203, 0.25) 0%, transparent 35%),
-        radial-gradient(ellipse at 90% 80%, rgba(255, 182, 193, 0.3) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 50%, rgba(255, 218, 224, 0.2) 0%, transparent 50%),
-        linear-gradient(135deg, 
-            rgba(255, 240, 245, 0.95) 0%,
-            rgba(255, 228, 235, 0.98) 25%,
-            rgba(254, 240, 245, 0.95) 50%,
-            rgba(255, 235, 240, 0.98) 75%,
-            rgba(255, 245, 248, 0.95) 100%
-        );
+    background: linear-gradient(135deg, 
+        rgba(255, 240, 245, 0.95) 0%,
+        rgba(255, 228, 235, 0.98) 50%,
+        rgba(255, 245, 248, 0.95) 100%
+    );
     background-color: #FFF5F7;
-    background-attachment: fixed;
     position: relative;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
@@ -80,50 +75,10 @@ body::before {
     height: 100%;
     pointer-events: none;
     background-image: 
-        radial-gradient(circle at 30% 40%, rgba(255, 182, 193, 0.15) 0%, transparent 25%),
-        radial-gradient(circle at 70% 60%, rgba(255, 192, 203, 0.12) 0%, transparent 30%),
-        radial-gradient(circle at 20% 80%, rgba(255, 218, 224, 0.1) 0%, transparent 20%);
+        radial-gradient(circle at 30% 40%, rgba(255, 182, 193, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 70% 60%, rgba(255, 192, 203, 0.08) 0%, transparent 30%);
     opacity: 0.6;
     z-index: 0;
-    animation: liquidFloat 20s ease-in-out infinite alternate;
-}
-
-@keyframes liquidFloat {
-    0% {
-        transform: scale(1) translate(0, 0);
-    }
-    33% {
-        transform: scale(1.05) translate(2%, 2%);
-    }
-    66% {
-        transform: scale(0.98) translate(-2%, 1%);
-    }
-    100% {
-        transform: scale(1.02) translate(1%, -1%);
-    }
-}
-
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: 
-        linear-gradient(110deg, 
-            transparent 0%,
-            rgba(255, 255, 255, 0.4) 45%,
-            rgba(255, 255, 255, 0.6) 50%,
-            rgba(255, 255, 255, 0.4) 55%,
-            transparent 100%
-        );
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    opacity: 0.5;
-    z-index: 0;
-    mix-blend-mode: overlay;
 }
 
 main {
@@ -152,6 +107,7 @@ main {
     border-bottom: none;
     transition: var(--transition);
     box-shadow: none;
+    will-change: transform;
 }
 
 .nav {
@@ -165,16 +121,17 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 9999px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 0 rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
     margin-top: 0px;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .nav-container::before {
@@ -280,18 +237,12 @@ main {
     min-height: calc(100vh + var(--header-height, 96px));
     display: flex;
     align-items: center;
-    background:
-        radial-gradient(ellipse at 20% 140%, rgba(255, 182, 193, 0.4) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% -40%, rgba(255, 192, 203, 0.35) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 240, 245, 0.3) 0%, transparent 60%),
-        linear-gradient(135deg,
-            rgba(255, 245, 248, 0.6) 0%,
-            rgba(255, 235, 240, 0.4) 50%,
-            rgba(255, 240, 245, 0.6) 100%);
+    background: linear-gradient(135deg,
+        rgba(255, 245, 248, 0.6) 0%,
+        rgba(255, 235, 240, 0.4) 50%,
+        rgba(255, 240, 245, 0.6) 100%);
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(60px) saturate(150%);
-    -webkit-backdrop-filter: blur(60px) saturate(150%);
 }
 
 .hero::after {
@@ -302,54 +253,10 @@ main {
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.35) 0%, transparent 38%),
-        radial-gradient(circle at 20% 80%, rgba(255, 192, 203, 0.3) 0%, transparent 38%),
-        radial-gradient(circle at 50% 40%, rgba(255, 240, 245, 0.25) 0%, transparent 45%);
+        radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.2) 0%, transparent 38%),
+        radial-gradient(circle at 20% 80%, rgba(255, 192, 203, 0.15) 0%, transparent 38%);
     pointer-events: none;
     opacity: 0.9;
-    animation: gradientShift 18s ease-in-out infinite alternate;
-}
-
-@keyframes gradientShift {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    50% {
-        transform: scale(1.1) rotate(1deg);
-    }
-    100% {
-        transform: scale(1) rotate(0deg);
-    }
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 25%),
-        radial-gradient(circle at 75% 70%, rgba(255, 255, 255, 0.5) 0%, transparent 30%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 40%);
-    opacity: 0.4;
-    animation: glassShine 12s ease-in-out infinite alternate;
-}
-
-@keyframes glassShine {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0.4;
-    }
-    50% {
-        transform: translate(5%, -5%) scale(1.1);
-        opacity: 0.6;
-    }
-    100% {
-        transform: translate(-5%, 5%) scale(1);
-        opacity: 0.4;
-    }
 }
 
 .hero-container {
@@ -501,6 +408,8 @@ main {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-xl);
     transition: var(--transition);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .hero-image:hover {
@@ -509,14 +418,10 @@ main {
 
 .floating-card {
     position: absolute;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
     padding: 16px 20px;
     border-radius: var(--border-radius);
-    box-shadow: 
-        0 8px 32px rgba(31, 38, 135, 0.15),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -524,6 +429,7 @@ main {
     color: var(--gray-800);
     animation: float 3s ease-in-out infinite;
     border: 1px solid rgba(255, 255, 255, 0.4);
+    will-change: transform;
 }
 
 .floating-card:nth-child(2) {
@@ -580,42 +486,13 @@ main {
 /* Curso Section */
 .curso {
     padding: 120px 0;
-    background: 
-        radial-gradient(ellipse at 30% 30%, rgba(255, 218, 224, 0.4) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 70%, rgba(255, 192, 203, 0.35) 0%, transparent 50%),
-        linear-gradient(180deg, 
-            rgba(255, 250, 252, 0.95) 0%,
-            rgba(255, 240, 245, 0.9) 50%,
-            rgba(255, 235, 240, 0.95) 100%
-        );
+    background: linear-gradient(180deg, 
+        rgba(255, 250, 252, 0.95) 0%,
+        rgba(255, 240, 245, 0.9) 50%,
+        rgba(255, 235, 240, 0.95) 100%
+    );
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(30px) saturate(130%);
-    -webkit-backdrop-filter: blur(30px) saturate(130%);
-}
-
-.curso::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.6) 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 0%, transparent 55%);
-    opacity: 0.7;
-    animation: glassFloat 15s ease-in-out infinite alternate;
-}
-
-@keyframes glassFloat {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(3%, 3%) scale(1.05);
-    }
 }
 
 .curso-grid {
@@ -625,20 +502,16 @@ main {
 }
 
 .curso-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.9);
     padding: 40px 32px;
     border-radius: var(--border-radius-lg);
-    box-shadow: 
-        0 8px 32px rgba(255, 182, 193, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.6);
     transition: var(--transition);
     text-align: center;
     position: relative;
     overflow: hidden;
+    will-change: transform;
 }
 
 .curso-card::before {
@@ -688,31 +561,12 @@ main {
 /* Beneficios Section */
 .beneficios {
     padding: 120px 0;
-    background: 
-        radial-gradient(ellipse at 80% 20%, rgba(255, 240, 245, 0.6) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(255, 228, 235, 0.5) 0%, transparent 50%),
-        linear-gradient(135deg, 
-            rgba(255, 255, 255, 0.95) 0%,
-            rgba(255, 250, 252, 0.9) 100%
-        );
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 250, 252, 0.9) 100%
+    );
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.beneficios::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 30%),
-        radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.7) 0%, transparent 35%);
-    opacity: 0.5;
-    animation: glassShine 10s ease-in-out infinite alternate;
 }
 
 .beneficios-content {
@@ -1038,49 +892,13 @@ main {
 /* Testimonios Section */
 .testimonios {
     padding: 120px 0;
-    background: 
-        radial-gradient(ellipse at 20% 30%, rgba(255, 192, 203, 0.35) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 218, 224, 0.3) 0%, transparent 45%),
-        linear-gradient(135deg, 
-            rgba(255, 235, 240, 0.9) 0%,
-            rgba(255, 240, 245, 0.85) 50%,
-            rgba(255, 228, 235, 0.9) 100%
-        );
+    background: linear-gradient(135deg, 
+        rgba(255, 235, 240, 0.9) 0%,
+        rgba(255, 240, 245, 0.85) 50%,
+        rgba(255, 228, 235, 0.9) 100%
+    );
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(25px) saturate(120%);
-    -webkit-backdrop-filter: blur(25px) saturate(120%);
-}
-
-.testimonios::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.7) 0%, transparent 25%),
-        radial-gradient(circle at 85% 75%, rgba(255, 255, 255, 0.6) 0%, transparent 30%),
-        radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.2) 0%, transparent 45%);
-    opacity: 0.6;
-    animation: glassFloat 12s ease-in-out infinite alternate;
-}
-
-.testimonios::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        linear-gradient(135deg, 
-            transparent 0%,
-            rgba(255, 255, 255, 0.3) 50%,
-            transparent 100%);
-    opacity: 0.4;
-    z-index: 1;
 }
 
 .testimonios .container {
@@ -1095,16 +913,13 @@ main {
 }
 
 .testimonio-card {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(15px) saturate(150%);
-    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    background: rgba(255, 255, 255, 0.9);
     padding: 32px;
     border-radius: var(--border-radius-lg);
-    box-shadow: 
-        0 8px 32px rgba(255, 182, 193, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.5);
     transition: var(--transition);
+    will-change: transform;
 }
 
 .testimonio-card:hover {
@@ -1198,31 +1013,12 @@ main {
 /* Contacto Section */
 .contacto {
     padding: 120px 0;
-    background: 
-        radial-gradient(ellipse at 40% 30%, rgba(255, 240, 245, 0.5) 0%, transparent 50%),
-        radial-gradient(ellipse at 60% 70%, rgba(255, 228, 235, 0.45) 0%, transparent 50%),
-        linear-gradient(135deg, 
-            rgba(255, 250, 252, 0.95) 0%,
-            rgba(255, 255, 255, 0.9) 100%
-        );
+    background: linear-gradient(135deg, 
+        rgba(255, 250, 252, 0.95) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-
-.contacto::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 25% 35%, rgba(255, 255, 255, 0.8) 0%, transparent 30%),
-        radial-gradient(circle at 75% 65%, rgba(255, 255, 255, 0.7) 0%, transparent 35%);
-    opacity: 0.5;
-    animation: glassShine 14s ease-in-out infinite alternate;
 }
 
 .contacto .container {
@@ -1288,14 +1084,10 @@ main {
 
 /* Form */
 .form {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.9);
     padding: 40px;
     border-radius: var(--border-radius-lg);
-    box-shadow: 
-        0 8px 32px rgba(255, 182, 193, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(255, 182, 193, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
@@ -1522,4 +1314,20 @@ main {
 .scroll-reveal.revealed {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Desactivar animaciones para dispositivos con movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .floating-card {
+        animation: none;
+    }
 }
