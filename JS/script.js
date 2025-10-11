@@ -11,9 +11,60 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
+            
+            // Actualizar enlace activo inmediatamente
+            updateActiveNavLink(this.getAttribute('href'));
         }
     });
 });
+
+// Active navigation indicator
+function updateActiveNavLink(sectionId) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Detectar sección activa al hacer scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+function highlightNavOnScroll() {
+    const scrollPosition = window.scrollY + 200; // Offset para activar antes
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = '#' + section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+    
+    // Si estamos en el top de la página, activar "Inicio"
+    if (window.scrollY < 100) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#inicio') {
+                link.classList.add('active');
+            }
+        });
+    }
+}
+
+// Ejecutar al cargar y al hacer scroll
+window.addEventListener('scroll', throttle(highlightNavOnScroll, 100), { passive: true });
+window.addEventListener('load', highlightNavOnScroll);
 
 // Performance optimization: Throttle scroll events
 function throttle(func, wait) {
@@ -77,17 +128,27 @@ window.addEventListener('scroll', function() {
 
 // Mobile navigation toggle
 const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.querySelector('.nav-links');
+const navLinksContainer = document.querySelector('.nav-links');
 
-if (navToggle && navLinks) {
+if (navToggle && navLinksContainer) {
     navToggle.addEventListener('click', function() {
-        navLinks.classList.toggle('active');
+        navLinksContainer.classList.toggle('active');
         navToggle.classList.toggle('active');
 
         // Ajusta la posición del menú móvil según la altura actual del header
-        if (header && navLinks.classList.contains('active')) {
-            navLinks.style.top = getComputedStyle(document.documentElement).getPropertyValue('--header-height') || (header.offsetHeight + 'px');
+        if (header && navLinksContainer.classList.contains('active')) {
+            navLinksContainer.style.top = getComputedStyle(document.documentElement).getPropertyValue('--header-height') || (header.offsetHeight + 'px');
         }
+    });
+    
+    // Cerrar menú móvil al hacer clic en un enlace
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                navLinksContainer.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
     });
 }
 
