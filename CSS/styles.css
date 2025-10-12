@@ -180,7 +180,7 @@ main {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 36px;
+    gap: 24px;
     align-items: center;
 }
 
