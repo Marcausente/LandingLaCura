@@ -690,6 +690,9 @@ main {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .btn-hero-primary::before {
@@ -804,6 +807,8 @@ main {
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .cta-primary:hover {

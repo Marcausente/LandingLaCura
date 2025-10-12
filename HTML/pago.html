@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasarela de Pago - La Cura</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../IMG/Marca/La cura-08.png">
+    <link rel="shortcut icon" type="image/png" href="../IMG/Marca/La cura-08.png">
+    <link rel="apple-touch-icon" href="../IMG/Marca/La cura-08.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .payment-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, 
+                rgba(255, 240, 245, 0.95) 0%,
+                rgba(255, 228, 235, 0.98) 50%,
+                rgba(255, 245, 248, 0.95) 100%
+            );
+            padding: 120px 0 80px;
+        }
+
+        .payment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .payment-info {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .payment-info h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 24px;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-family: var(--font-family);
+            transition: var(--transition);
+            background: var(--white-pure);
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .payment-method {
+            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: var(--white-pure);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(231, 78, 111, 0.2);
+        }
+
+        .payment-method-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .payment-method-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .order-summary {
+            position: sticky;
+            top: 120px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 32px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .order-summary h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 24px;
+        }
+
+        .product-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(231, 78, 111, 0.1);
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, 
+                rgba(231, 78, 111, 0.1) 0%, 
+                rgba(74, 144, 226, 0.1) 100%);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+
+        .product-details h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+
+        .product-details p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .price-breakdown {
+            margin-bottom: 24px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .price-row.total {
+            padding-top: 16px;
+            border-top: 2px solid rgba(231, 78, 111, 0.2);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .price-row.discount {
+            color: var(--secondary-green);
+            font-weight: 600;
+        }
+
+        .guarantee-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: linear-gradient(135deg, 
+                rgba(126, 211, 33, 0.1) 0%, 
+                rgba(74, 144, 226, 0.1) 100%);
+            border-radius: var(--border-radius);
+            margin-top: 24px;
+        }
+
+        .guarantee-icon {
+            font-size: 24px;
+        }
+
+        .guarantee-text {
+            font-size: 12px;
+            color: var(--gray-700);
+            line-height: 1.4;
+        }
+
+        .guarantee-text strong {
+            display: block;
+            font-size: 14px;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .submit-payment {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, 
+                var(--primary-color) 0%, 
+                var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 8px 24px rgba(231, 78, 111, 0.3);
+            margin-top: 24px;
+        }
+
+        .submit-payment:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(231, 78, 111, 0.4);
+        }
+
+        .security-badges {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(231, 78, 111, 0.1);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 32px;
+            font-size: 14px;
+            color: var(--gray-600);
+        }
+
+        .breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-info,
+            .order-summary {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                        <img src="../IMG/Marca/La cura-08.png" alt="La Cura Logo" class="logo-img">
+                        <span class="logo-text">La Cura</span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="index.html#curso" class="nav-link">El Curso</a></li>
+                    <li><a href="index.html#beneficios" class="nav-link">Beneficios</a></li>
+                    <li><a href="index.html#agoney" class="nav-link">Agoney</a></li>
+                    <li><a href="index.html#testimonios" class="nav-link">Testimonios</a></li>
+                    <li><a href="index.html#contacto" class="nav-link">Contacto</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                </ul>
+                <button class="nav-toggle" id="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="payment-page">
+        <div class="payment-container">
+            <!-- Formulario de Pago -->
+            <div class="payment-info">
+                <div class="breadcrumb">
+                    <a href="index.html">Inicio</a>
+                    <span>→</span>
+                    <span>Pago</span>
+                </div>
+
+                <h2>Completa tu Transformación</h2>
+
+                <form id="payment-form">
+                    <!-- Información Personal -->
+                    <div class="form-section">
+                        <h3>📋 Información Personal</h3>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Juan" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Apellidos</label>
+                                <input type="text" placeholder="García" required>
+                            </div>
+                        </div>
+                        <div class="form-row full">
+                            <div class="input-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row full">
+                            <div class="input-group">
+                                <label>Teléfono</label>
+                                <input type="tel" placeholder="+34 600 000 000" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Método de Pago -->
+                    <div class="form-section">
+                        <h3>💳 Método de Pago</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method active" data-method="card">
+                                <div class="payment-method-icon">💳</div>
+                                <div class="payment-method-name">Tarjeta</div>
+                            </div>
+                            <div class="payment-method" data-method="paypal">
+                                <div class="payment-method-icon">🅿️</div>
+                                <div class="payment-method-name">PayPal</div>
+                            </div>
+                            <div class="payment-method" data-method="transfer">
+                                <div class="payment-method-icon">🏦</div>
+                                <div class="payment-method-name">Transferencia</div>
+                            </div>
+                        </div>
+
+                        <!-- Datos de Tarjeta -->
+                        <div id="card-details">
+                            <div class="form-row full">
+                                <div class="input-group">
+                                    <label>Número de Tarjeta</label>
+                                    <input type="text" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                </div>
+                            </div>
+                            <div class="form-row full">
+                                <div class="input-group">
+                                    <label>Titular de la Tarjeta</label>
+                                    <input type="text" placeholder="Nombre como aparece en la tarjeta" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Fecha de Expiración</label>
+                                    <input type="text" placeholder="MM/AA" maxlength="5" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>CVV</label>
+                                    <input type="text" placeholder="123" maxlength="3" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dirección de Facturación -->
+                    <div class="form-section">
+                        <h3>📍 Dirección de Facturación</h3>
+                        <div class="form-row full">
+                            <div class="input-group">
+                                <label>Dirección</label>
+                                <input type="text" placeholder="Calle, número, piso" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Ciudad</label>
+                                <input type="text" placeholder="Madrid" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Código Postal</label>
+                                <input type="text" placeholder="28001" required>
+                            </div>
+                        </div>
+                        <div class="form-row full">
+                            <div class="input-group">
+                                <label>País</label>
+                                <select required>
+                                    <option value="">Selecciona un país</option>
+                                    <option value="ES">España</option>
+                                    <option value="MX">México</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="CO">Colombia</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="PE">Perú</option>
+                                    <option value="VE">Venezuela</option>
+                                    <option value="EC">Ecuador</option>
+                                    <option value="BO">Bolivia</option>
+                                    <option value="UY">Uruguay</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-payment">
+                        Completar Pago Seguro 🔒
+                    </button>
+
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <span>🔒</span>
+                            <span>Pago Seguro SSL</span>
+                        </div>
+                        <div class="security-badge">
+                            <span>✓</span>
+                            <span>Verificado</span>
+                        </div>
+                        <div class="security-badge">
+                            <span>💳</span>
+                            <span>PCI-DSS</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Resumen del Pedido -->
+            <div class="order-summary">
+                <h3>Resumen del Pedido</h3>
+
+                <div class="product-item">
+                    <div class="product-image">💎</div>
+                    <div class="product-details">
+                        <h4>Curso La Cura - Completo</h4>
+                        <p>Acceso completo y de por vida</p>
+                        <p>✓ Todos los módulos</p>
+                        <p>✓ Material descargable</p>
+                        <p>✓ Soporte 24/7</p>
+                        <div class="product-price">397€</div>
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Subtotal</span>
+                        <span>397€</span>
+                    </div>
+                    <div class="price-row discount">
+                        <span>Descuento especial</span>
+                        <span>-50€</span>
+                    </div>
+                    <div class="price-row">
+                        <span>IVA (21%)</span>
+                        <span>72.87€</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total</span>
+                        <span>419.87€</span>
+                    </div>
+                </div>
+
+                <div class="guarantee-badge">
+                    <div class="guarantee-icon">🛡️</div>
+                    <div class="guarantee-text">
+                        <strong>Garantía de 30 días</strong>
+                        Si no estás satisfecho, te devolvemos el 100% de tu dinero. Sin preguntas.
+                    </div>
+                </div>
+
+                <div style="margin-top: 24px; padding: 16px; background: rgba(231, 78, 111, 0.05); border-radius: var(--border-radius); text-align: center;">
+                    <p style="font-size: 14px; color: var(--gray-700); margin: 0;">
+                        🔥 <strong>+1,000 personas</strong> ya han comenzado su transformación
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div>
+                        <img src="../IMG/Marca/La cura-09.png" alt="La Cura" class="footer-logo-img">
+                        <span>La Cura</span>
+                    </div>
+                    <p>Una travesía audaz hacia la autenticidad. Para los intrépidos que desafían el status quo.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Curso</h4>
+                        <ul>
+                            <li><a href="index.html#curso">Contenido</a></li>
+                            <li><a href="index.html#beneficios">Beneficios</a></li>
+                            <li><a href="index.html#testimonios">Testimonios</a></li>
+                            <li><a href="index.html#agoney">Sobre Agoney</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Soporte</h4>
+                        <ul>
+                            <li><a href="index.html#contacto">Contacto</a></li>
+                            <li><a href="#">Preguntas Frecuentes</a></li>
+                            <li><a href="#">Centro de Ayuda</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Términos y Condiciones</a></li>
+                            <li><a href="#">Política de Privacidad</a></li>
+                            <li><a href="#">Cookies</a></li>
+                            <li><a href="#">Aviso Legal</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 La Cura. Todos los derechos reservados. Hecho con ❤️ para los intrépidos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/script.js"></script>
+    <script>
+        // Payment method selection
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', function() {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form submission
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate payment processing
+            const submitBtn = document.querySelector('.submit-payment');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Procesando pago...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('¡Pago procesado correctamente! Gracias por unirte a La Cura. Te hemos enviado un email con los detalles de acceso.');
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+
+        // Card number formatting
+        document.querySelector('input[placeholder="1234 5678 9012 3456"]')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.querySelector('input[placeholder="MM/AA"]')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
+
